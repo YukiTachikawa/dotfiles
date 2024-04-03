@@ -1,11 +1,11 @@
 #!/bin/bash
 set -eu
-# 実行場所のディレクトリを取得
-THIS_DIR=$(cd $(dirname $0); pwd)
-
 echo "start setup"
 
 # dotfilesのシンボリックリンクを作成
-for f in .??*; do
-    ln -snfv ~/dotfiles/"$f" ~/
+DOT_FILES=(.bashrc .zshrc)
+for file in ${DOT_FILES[@]}
+do
+    ln -snfv $HOME/$file $HOME/$file
 done
+ 
