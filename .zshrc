@@ -1,17 +1,6 @@
 # alias code="/mnt/c/Users/takashi/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code"
-
-# # poetry
-# export PATH="/root/.local/bin:$PATH"
-# fpath+=~/.zfunc 
-
-# # pyenv
-# export PYENV_ROOT="$HOME/.pyenv"
-# export PATH="$PYENV_ROOT/bin:$PATH"
-# eval "$(pyenv init --path)"
-
-
 setopt no_beep
-export BROWSER='"/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"'
+# export BROWSER='"/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"'
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
