@@ -1,11 +1,8 @@
 #!/bin/bash
-set -eu
-echo "start setup"
-
-# dotfilesのシンボリックリンクを作成
-DOT_FILES=(.bashrc .zshrc)
-for file in ${DOT_FILES[@]}
-do
-    ln -snfv $HOME/$file $HOME/$file
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+ 
+for dotfile in .??*; do 
+    [[ "$dotfile" == ".git" ]] && continue 
+    ln -snfv  $SCRIPT_DIR/$dotfile ~/$dotfile 
 done
  
