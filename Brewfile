@@ -1,7 +1,7 @@
 tap "homebrew/bundle"
 brew "gcc"
 brew "gh"
-brew "go"
+# brew "go"
 brew "neovim"
 brew "pnpm"
 brew "poetry"

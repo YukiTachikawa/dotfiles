@@ -9,8 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: brew unlink go@1.21
-
       - name: Run brew bunlde
         run: brew bundle
 
