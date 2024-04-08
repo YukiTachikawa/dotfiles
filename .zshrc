@@ -1,5 +1,8 @@
 setopt no_beep
-# export BROWSER='"/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"'
+
+if [ -d "/mnt/c" ]; then 
+    # export BROWSER='"/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"'
+fi
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
@@ -8,21 +11,29 @@ export NVM_DIR="$HOME/.nvm"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
+# CUDA
+if [ -d "/usr/local/cuda-12.4" ]; then
+    export PATH="/usr/local/cuda-12.4/bin:$PATH"
+    export LD_LIBRARY_PATH="/usr/local/cuda-12.4/lib64:$LD_LIBRARY_PATH"
+fi
 
 # zsh
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 if type brew &>/dev/null; then
     FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
     autoload -Uz compinit
     compinit
 fi
 
-# CUDA
-if [ -d "/usr/local/cuda-12.4" ]; then
-    export PATH="/usr/local/cuda-12.4/bin:$PATH"
-    export LD_LIBRARY_PATH="/usr/local/cuda-12.4/lib64:$LD_LIBRARY_PATH"
-fi
+setopt auto_cd #一致するディレクトリに cdなしで移動できる
+setopt correct #コマンドのスペルを修正(正しい可能性のある候補を表示)
+setopt correct_all #コマンドラインの引数のスペルを修正
+setopt hist_ignore_dups #直前と同じコマンドは履歴に追加しない
+setopt share_history  #他のzshで履歴を共有する
+setopt inc_append_history #即座に履歴を保存する
+export HISTFILE=~/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=10000
 
 eval "$(starship init zsh)"
