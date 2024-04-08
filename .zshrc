@@ -1,4 +1,3 @@
-# alias code="/mnt/c/Users/takashi/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code"
 setopt no_beep
 # export BROWSER='"/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"'
 
