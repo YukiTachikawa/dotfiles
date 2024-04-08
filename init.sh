@@ -1,13 +1,12 @@
 #!/bin/bash
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-EXCLUDE_DIRS=(".git" ".config")
+EXCLUDE_DIRS=(".git" ".config" ".github")
 
 for dotfile in "${SCRIPT_DIR}"/.?*; do
     base_dotfile=$(basename "$dotfile")
-    if [[ ! " ${EXCLUDE_DIRS[@]} " =~ " ${base_dotfile} " ]]; then
-        ln -snfv "$dotfile" "$HOME/$base_dotfile"
-    fi
+    [[ " ${EXCLUDE_DIRS[@]} " =~ " ${base_dotfile} " ]] && continue
+    ln -snfv "$dotfile" "$HOME/$base_dotfile" 
 done
  
 function link_directory {
