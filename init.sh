@@ -1,22 +1,23 @@
 #!/bin/bash
+
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
- 
-for dotfile in .??*; do 
-    [[ "$dotfile" == ".git" ]] && continue 
-    ln -snfv  "$SCRIPT_DIR"/"$dotfile" ~/"$dotfile"
+EXCLUDE_DIRS=(".git" ".config")
+
+for dotfile in "${SCRIPT_DIR}"/.?*; do
+    base_dotfile=$(basename "$dotfile")
+    if [[ ! " ${EXCLUDE_DIRS[@]} " =~ " ${base_dotfile} " ]]; then
+        ln -snfv "$dotfile" "$HOME/$base_dotfile"
+    fi
 done
  
+function link_directory {
+    local source_dir="$1"
+    local dest_dir="$HOME/${source_dir#$SCRIPT_DIR/}" 
+    find "$source_dir" -type f ! -path '*.git*' | while IFS= read -r file; do 
+        local dest_path="${dest_dir}/${file#$SCRIPT_DIR/}"
+        mkdir -p "$(dirname "$dest_path")"
+        ln -snfv "$file" "$dest_path"
+    done
+}
 
-DOT_DIRECTORY="${PWD}"
-declare -a DIRECTORIES=(".config")
-for child_directory in $DIRECTORIES; do
-  cd "${DOT_DIRECTORY}/${child_directory}"
-
-  for directory in $(find . -type d); do
-    mkdir -p "${HOME}/${child_directory}/${directory}"
-  done
-
-  for file in $(find . -type f | grep -v .git); do
-      ln -snfv "${DOT_DIRECTORY}/${child_directory}/${file:2}" "${HOME}/${child_directory}/${file:2}"
-  done
-done
+link_directory "${SCRIPT_DIR}/.config"
