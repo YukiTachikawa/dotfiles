@@ -9,8 +9,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - run: brew unlink go
+
       - name: Run brew bunlde
-        run: brew bundle --force
+        run: brew bundle
 
       - name: Run init.sh
         run: ./init.sh
