@@ -13,7 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install brew
+      # https://qiita.com/access3151fq/items/c31671934906cc73f541
+      - name: Setup Homebrew
         run: |
           echo "/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin" >> $GITHUB_PATH
           sudo apt-get install build-essential
