@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run brew bunlde
-        run: brew bundle
+        run: brew bundle --force
 
       - name: Run init.sh
         run: ./init.sh
