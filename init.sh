@@ -19,3 +19,4 @@ function link_directory {
 }
 
 link_directory ".config"
+link_directory ".rye"
