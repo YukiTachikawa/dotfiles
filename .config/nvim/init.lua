@@ -84,7 +84,6 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
-
 vim.g.rustfmt_autosave = 1
 
 -- Set <space> as the leader key
@@ -367,12 +366,19 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
-        -- pickers = {}
+        defaults = {
+          -- file_ignore_patterns = { 'node_modules', '.git', '.cache', 'vendor' },
+          -- hidden = true,
+          --   mappings = {
+          --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+          --   },
+        },
+        pickers = {
+          find_files = {
+            file_ignore_patterns = { 'node_modules', '.git' },
+            hidden = true,
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
