@@ -1,4 +1,5 @@
 --[[
+Tutrio
 
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
@@ -380,6 +381,14 @@ require('lazy').setup({
           find_files = {
             file_ignore_patterns = { 'node_modules', '.git' },
             hidden = true,
+          },
+          grep_string = {
+            file_ignore_patterns = { 'node_modules', '.git' },
+            additional_args = { '--hidden' },
+          },
+          live_grep = {
+            file_ignore_patterns = { 'node_modules', '.git' },
+            additional_args = { '--hidden' },
           },
         },
         extensions = {
