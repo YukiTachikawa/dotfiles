@@ -41,4 +41,13 @@ return {
       { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
     },
   },
+
+  {
+    'akinsho/toggleterm.nvim',
+    keys = {
+      { '<leader>tt', '<cmd>ToggleTerm<cr>', desc = 'ToggleTerm' },
+    },
+    version = '*',
+    config = true,
+  },
 }
