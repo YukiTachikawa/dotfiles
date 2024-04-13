@@ -6,5 +6,9 @@ return {
   {
     "github/copilot.vim",
     lazy=false,
-  }
+  },
+  {
+    "rust-lang/rust.vim",
+    lazy=false,
+  },
 }
