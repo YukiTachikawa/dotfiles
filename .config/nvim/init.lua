@@ -197,9 +197,11 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('n', '<C-s>', ':w<CR>', { noremap = true, silent = true })
 vim.keymap.set('i', '<C-s>', '<C-\\><C-n>:w<CR>', { noremap = true, silent = true })
 
--- Ctrl+e hift to :Explore
-vim.keymap.set('n', '<C-e>', ':Explore<CR>', { noremap = true, silent = true })
+-- Ctrl+e to :NvimTreeOpen
+vim.keymap.set('n', '<C-e>', ':NvimTreeOpen<CR>', { noremap = true, silent = true })
 
+-- Ctrl+g to :LazyGit
+vim.keymap.set('n', '<C-g>', ':LazyGit<CR>', { noremap = true, silent = true })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -249,14 +251,13 @@ require('lazy').setup({
   --    require('Comment').setup({})
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', 
-    opts = {
-      toggler = {
-        line = '<C-_>',
-      },
-      opleader = {
-        line = '<C-_>',
-      },
+  { 'numToStr/Comment.nvim', opts = {
+    toggler = {
+      line = '<C-_>',
+    },
+    opleader = {
+      line = '<C-_>',
+    },
   } },
 
   -- Here is a more advanced example where we pass configuration
