@@ -197,6 +197,9 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('n', '<C-s>', ':w<CR>', { noremap = true, silent = true })
 vim.keymap.set('i', '<C-s>', '<C-\\><C-n>:w<CR>', { noremap = true, silent = true })
 
+-- Ctrl+e hift to :Explore
+vim.keymap.set('n', '<C-e>', ':Explore<CR>', { noremap = true, silent = true })
+
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
