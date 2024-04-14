@@ -229,6 +229,9 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+-- https://neovim.io/doc/user/provider.html
+vim.g.python3_host_prog = '~/.pyenv/versions/py3nvim/bin/python'
+
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
@@ -578,7 +581,28 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         gopls = {},
-        -- pyright = {},
+        pyright = {
+          -- Using Ruff's import organizer
+          disableOrganizeImports = true,
+          settings = {
+            python = {
+              venvPath = '.',
+              pythonPath = './.venv/bin/python',
+            },
+          },
+          analysis = {
+            -- Ignore all files for analysis to exclusively use Ruff for linting
+            ignore = { '*' },
+          },
+        },
+        -- ruff_lsp = {
+        --   init_options = {
+        --     settings = {
+        --       -- Any extra CLI arguments for `ruff` go here.
+        --       args = {},
+        --     }
+        --   },
+        -- },
         rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -840,7 +864,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'python', 'vimdoc' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {

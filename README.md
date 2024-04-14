@@ -36,3 +36,9 @@ sudo cp /var/cudnn-local-repo-ubuntu2204-9.0.0/cudnn-*-keyring.gpg /usr/share/ke
 sudo apt-get update
 sudo apt-get -y install cudnn
 ```
+
+### NeoVim
+
+#### Python
+
+https://neovim.io/doc/user/provider.html

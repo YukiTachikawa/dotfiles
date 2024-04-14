@@ -9,6 +9,11 @@ if [ `uname` != "Darwin" ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
+# pyenv (nvim)
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
 # CUDA
 if [ -d "/usr/local/cuda-12.4" ]; then
     export PATH="/usr/local/cuda-12.4/bin:$PATH"
