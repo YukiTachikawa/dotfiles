@@ -200,6 +200,17 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('n', '<C-s>', ':w<CR>', { noremap = true, silent = true })
 vim.keymap.set('i', '<C-s>', '<C-\\><C-n>:w<CR>', { noremap = true, silent = true })
 
+vim.api.nvim_create_autocmd('BufWritePre', {
+  buffer = buffer,
+  callback = function()
+    -- vim.lsp.buf.format { async = false }
+    vim.lsp.buf.code_action {
+      context = { only = { 'source.organizeImports' } },
+      apply = true,
+    }
+  end,
+})
+
 -- Ctrl+e to :NvimTreeOpen
 vim.keymap.set('n', '<C-e>', ':NvimTreeOpen<CR>', { noremap = true, silent = true })
 
@@ -569,6 +580,35 @@ require('lazy').setup({
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
+      -- https://docs.astral.sh/ruff/integrations/#language-server-protocol-official
+      require('lspconfig').ruff_lsp.setup {
+        on_attach = function(client, bufnr)
+          -- Enable completion triggered by <c-x><c-o>
+          vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+          -- Mappings.
+          -- See `:help vim.lsp.*` for documentation on any of the below functions
+          local bufopts = { noremap = true, silent = true, buffer = bufnr }
+          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+          vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+          vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+          vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+          vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+          vim.keymap.set('n', '<space>wl', function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+          end, bufopts)
+          vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+          vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+          vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+          vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+          vim.keymap.set('n', '<space>f', function()
+            vim.lsp.buf.format { async = true }
+          end, bufopts)
+        end,
+      }
+
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
@@ -595,14 +635,6 @@ require('lazy').setup({
             ignore = { '*' },
           },
         },
-        -- ruff_lsp = {
-        --   init_options = {
-        --     settings = {
-        --       -- Any extra CLI arguments for `ruff` go here.
-        --       args = {},
-        --     }
-        --   },
-        -- },
         rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
