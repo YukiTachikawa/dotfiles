@@ -42,3 +42,10 @@ sudo apt-get -y install cudnn
 #### Python
 
 https://neovim.io/doc/user/provider.html
+
+```sh
+pyenv install 3.12.2
+pyenv virtualenv 3.12.2 py3nvim
+pyenv activate py3nvim
+python3 -m pip install pynvim
+```
