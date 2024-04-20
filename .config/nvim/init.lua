@@ -84,7 +84,9 @@ I hope you enjoy your Neovim journey,
 
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
+
 -- vim.g["fsharp#show_signature_on_cursor_move"] = 0
+
 vim.diagnostic.setqflist()
 
 vim.g.rustfmt_autosave = 1
@@ -641,7 +643,15 @@ require('lazy').setup({
             },
           },
         },
-        rust_analyzer = {},
+        rust_analyzer = {
+          -- settings = {
+          --   ['rust-analyzer'] = {
+          --     checkOnSave = {
+          --       command = 'clippy',
+          --     },
+          --   },
+          -- },
+        },
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
