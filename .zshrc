@@ -1,7 +1,8 @@
 setopt no_beep
 
 export PATH="$HOME/go/bin:$PATH"
-
+# COREPACK_ENABLE_STRICT=0
+export COREPACK_ENABLE_STRICT=0
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
