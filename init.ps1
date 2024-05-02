@@ -1,27 +1,21 @@
-function Link-Directory {
+# シンボリックリンクを作成するための関数
+function Create-Symlink {
     param (
-        [string]$sourceDir,
-        [string]$destinationRoot = "$env:USERPROFILE\AppLocal\Local\nvim"
+        [string]$target,
+        [string]$link
     )
 
-    # 元のディレクトリからすべてのファイルを検索
-    Get-ChildItem -Path $sourceDir -Recurse -File | Where-Object { $_.FullName -notmatch '\\.git\\' } | ForEach-Object {
-        $sourceFile = $_.FullName
-        $relativePath = $sourceFile.Substring($sourceDir.Length)
+    $targetFullPath = (Get-Item $target).FullName
 
-        $destinationPath = Join-Path -Path $destinationRoot -ChildPath $relativePath
-
-        # 目的のディレクトリが存在しない場合は作成
-        $destinationDir = Split-Path -Path $destinationPath
-        if (-not (Test-Path -Path $destinationDir)) {
-            New-Item -Path $destinationDir -ItemType Directory -Force | Out-Null
-        }
-
-        # シンボリックリンクを作成
-        New-Item -ItemType SymbolicLink -Path $destinationPath -Target $sourceFile -Force
+    # 既存のリンクがあれば削除
+    if (Test-Path $link) {
+        Remove-Item $link -Force
+        Write-Host "既存のシンボリックリンクを削除しました: $link"
     }
+
+    # 新たにシンボリックリンクを作成
+    New-Item -ItemType SymbolicLink -Path $link -Target $targetFullPath
+    Write-Host "新しいシンボリックリンクを作成しました: $link -> $targetFullPath"
 }
-
-# スクリプトを実行
-Link-Directory -sourceDir '.config\nvim'
-
+# シンボリックリンクを作成
+Create-Symlink -target ".config\nvim" -link "$env:USERPROFILE\AppData\Local\nvim"
