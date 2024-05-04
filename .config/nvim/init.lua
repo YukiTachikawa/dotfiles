@@ -204,6 +204,14 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('n', '<C-s>', ':w<CR>', { noremap = true, silent = true })
 vim.keymap.set('i', '<C-s>', '<C-\\><C-n>:w<CR>', { noremap = true, silent = true })
 
+-- Ctrl+delete to delete the word after the cursor
+vim.keymap.set('i', '<C-Del>', 'dw', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-Del>', 'dw', { noremap = true, silent = true })
+
+-- Ctrl+backspace to delete the word before the cursor
+vim.keymap.set('i', '<C-BS>', 'db', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-BS>', 'db', { noremap = true, silent = true })
+
 vim.api.nvim_create_autocmd('BufWritePre', {
   buffer = buffer,
   callback = function()
