@@ -9,6 +9,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 if [ `uname` != "Darwin" ]; then
+    # Java
+    export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+    export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
