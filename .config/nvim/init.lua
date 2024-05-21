@@ -652,13 +652,13 @@ require('lazy').setup({
           },
         },
         rust_analyzer = {
-          -- settings = {
-          --   ['rust-analyzer'] = {
-          --     checkOnSave = {
-          --       command = 'clippy',
-          --     },
-          --   },
-          -- },
+          settings = {
+            ['rust-analyzer'] = {
+              checkOnSave = {
+                command = 'clippy',
+              },
+            },
+          },
         },
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
