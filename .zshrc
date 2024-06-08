@@ -16,9 +16,9 @@ if [ `uname` != "Darwin" ]; then
 fi
 
 # pyenv (nvim)
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# eval "$(pyenv init --path)"
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
 
 # CUDA
 if [ -d "/usr/local/cuda-12.4" ]; then
